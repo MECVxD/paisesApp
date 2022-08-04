@@ -1,9 +1,9 @@
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { switchMap, tap } from 'rxjs/operators';
 
 import { Country } from '../../interfaces/pais.interface';
 import { PaisService } from '../../services/pais.service';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-ver-pais',

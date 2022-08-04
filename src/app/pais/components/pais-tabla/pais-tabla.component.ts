@@ -12,5 +12,4 @@ export class PaisTablaComponent {
   @Input() paises: Country[] = []
 
   constructor() { }
-
 }

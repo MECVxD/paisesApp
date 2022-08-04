@@ -10,9 +10,9 @@ import { PaisService } from '../../services/pais.service';
   ]
 })
 export class PorCapitalComponent {
-  public termino: string = '';
   public hayError: boolean = false;
   public paises: Country[] = [];
+  public termino: string = '';
   
   constructor(private paisService: PaisService) { }
 
