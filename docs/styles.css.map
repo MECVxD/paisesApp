@@ -1,0 +1,1 @@
+{"version":3,"sources":["src/styles.css"],"names":[],"mappings":"AAAA,8EAA8E;AAC9E;EACE,WAAW;AACb;AAEA;EACE,iBAAiB;AACnB,C","file":"styles.css","sourcesContent":["/* You can add global styles to this file, and also import other style files */\n.small-flag {\n  width: 50px;\n}\n\n.mr-1 {\n  margin-right: 5px;\n}"],"sourceRoot":"webpack:///"}
