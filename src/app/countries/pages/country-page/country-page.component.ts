@@ -7,21 +7,25 @@ import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-ver-pais',
-  templateUrl: './ver-pais.component.html',
-  styles: [
-  ]
+  templateUrl: './country-page.component.html',
+  styles: [],
 })
-export class VerPaisComponent implements OnInit {
+export class CountryPageComponent implements OnInit {
   public pais!: Country;
 
-  constructor(private activatedRoute: ActivatedRoute, private paisService: PaisService) { }
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private paisService: PaisService
+  ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.params.pipe(
-      switchMap((param) => this.paisService.buscarPaisPorCodigo(param.id))
-    ).subscribe((pais: Country) => {
-      this.pais = pais;
-    });
+    this.activatedRoute.params
+      .pipe(
+        switchMap((param) => this.paisService.buscarPaisPorCodigo(param.id))
+      )
+      .subscribe((pais: Country) => {
+        this.pais = pais;
+      });
     // this.activatedRoute.params.subscribe(({id}) => {
     //   this.paisService.buscarPaisPorCodigo(id).subscribe((pais: Country) => {
     //     console.log(pais);

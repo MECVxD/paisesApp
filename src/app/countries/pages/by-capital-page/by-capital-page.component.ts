@@ -5,25 +5,27 @@ import { PaisService } from '../../services/pais.service';
 
 @Component({
   selector: 'app-por-capital',
-  templateUrl: './por-capital.component.html',
-  styles: [
-  ]
+  templateUrl: './by-capital-page.component.html',
+  styles: [],
 })
-export class PorCapitalComponent {
+export class ByCapitalPageComponent {
   public hayError: boolean = false;
   public paises: Country[] = [];
   public termino: string = '';
-  
-  constructor(private paisService: PaisService) { }
+
+  constructor(private paisService: PaisService) {}
 
   public buscar(termino: string): void {
     this.termino = termino;
     this.hayError = false;
-    this.paisService.buscarCapital(this.termino).subscribe((paises: Country[]) => {
-      this.paises = paises;
-    }, (err) =>{
-      this.hayError = true;
-      this.paises = [];
-    });
+    this.paisService.buscarCapital(this.termino).subscribe(
+      (paises: Country[]) => {
+        this.paises = paises;
+      },
+      (err) => {
+        this.hayError = true;
+        this.paises = [];
+      }
+    );
   }
 }

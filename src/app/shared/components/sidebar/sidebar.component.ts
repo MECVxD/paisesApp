@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-sidebar',
+  selector: 'shared-sidebar',
   templateUrl: './sidebar.component.html',
   styles: [
     `
       li {
         cursor: pointer;
-      }  
+      }
     `
   ]
 })
