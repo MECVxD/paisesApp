@@ -3,7 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { PaisInputComponent } from './components/pais-input/pais-input.component';
+import { SharedModule } from '../shared/shared.module';
+
 import { PaisTablaComponent } from './components/pais-tabla/pais-tabla.component';
 import { CountriesRoutingModule } from './countries-routing.module';
 import { ByCapitalPageComponent } from './pages/by-capital-page/by-capital-page.component';
@@ -18,14 +19,14 @@ import { CountryPageComponent } from './pages/country-page/country-page.componen
     ByRegionComponent,
     CountryPageComponent,
     PaisTablaComponent,
-    PaisInputComponent
   ],
   exports: [],
   imports: [
     CommonModule,
-    CountriesRoutingModule,
     FormsModule,
-    RouterModule
-  ]
+    RouterModule,
+    CountriesRoutingModule,
+    SharedModule,
+  ],
 })
-export class CountriesModule { }
+export class CountriesModule {}

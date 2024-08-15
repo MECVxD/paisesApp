@@ -1,31 +1,34 @@
 import { Component } from '@angular/core';
 
 import { Country } from '../../interfaces/pais.interface';
-import { PaisService } from '../../services/pais.service';
+import { CountriesService } from '../../services/countries.service';
 
 @Component({
-  selector: 'app-por-capital',
+  selector: 'countries-by-capital-page',
   templateUrl: './by-capital-page.component.html',
   styles: [],
 })
 export class ByCapitalPageComponent {
   public hayError: boolean = false;
-  public paises: Country[] = [];
+  public countries: Country[] = [];
   public termino: string = '';
 
-  constructor(private paisService: PaisService) {}
+  constructor(private countriesService: CountriesService) {}
 
-  public buscar(termino: string): void {
-    this.termino = termino;
+  public searchByCapital(term: string): void {
+    console.log('Desde ByCapitalPage');
+    console.log({term});
+    this.termino = term;
     this.hayError = false;
-    this.paisService.buscarCapital(this.termino).subscribe(
-      (paises: Country[]) => {
-        this.paises = paises;
-      },
-      (err) => {
-        this.hayError = true;
-        this.paises = [];
-      }
-    );
+    this.countriesService.searchCapital(this.termino)
+      .subscribe(
+        (countries: Country[]) => {
+          this.countries = countries;
+        },
+        (err) => {
+          this.hayError = true;
+          this.countries = [];
+        }
+      );
   }
 }

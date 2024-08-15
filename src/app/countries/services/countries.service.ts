@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class PaisService {
+export class CountriesService {
   private apiUrl: string = 'https://restcountries.com/v2';
 
   get httpParams() {
@@ -18,11 +18,11 @@ export class PaisService {
 
   public buscarPais(termino: string): Observable<Country[]> {
     const url: string = `${this.apiUrl}/name/${termino}`;
-    return this.http.get<Country[]>(url, {params: this.httpParams});
+    return this.http.get<Country[]>(url);
   }
 
-  public buscarCapital(termino: string): Observable<Country[]> {
-    const url: string = `${this.apiUrl}/capital/${termino}`;
+  public searchCapital(term: string): Observable<Country[]> {
+    const url: string = `${this.apiUrl}/capital/${term}`;
     return this.http.get<Country[]>(url, {params: this.httpParams});
   }
 
@@ -32,7 +32,6 @@ export class PaisService {
   }
 
   public buscarRegion(region: string): Observable<Country[]> {
-    
     const url: string = `${this.apiUrl}/region/${region}`;
     return this.http.get<Country[]>(url, {params: this.httpParams});
   }
