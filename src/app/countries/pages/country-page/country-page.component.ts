@@ -1,35 +1,43 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
-import { Country } from '../../interfaces/pais.interface';
-// import { PaisService } from '../../services/pais.service';
+import { Country } from '../../interfaces/country.interface';
+import { CountriesService } from '../../services/countries.service';
 import { switchMap } from 'rxjs/operators';
 
+
 @Component({
-  selector: 'app-ver-pais',
+  selector: 'countries-country-page',
   templateUrl: './country-page.component.html',
   styles: [],
 })
 export class CountryPageComponent implements OnInit {
-  public pais!: Country;
+  public country?: Country;
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    // private paisService: PaisService
+    private router: Router,
+    private countriesService: CountriesService,
+
   ) {}
 
   ngOnInit(): void {
+    this.activatedRoute.params
+      .pipe(
+        switchMap(({id}) =>
+          this.countriesService.searchCountryByAlphaCode(id))
+      )
+      .subscribe((country) => {
+        if(!country) return this.router.navigateByUrl('');
+        return this.country = country;
+      });
     // this.activatedRoute.params
-    //   .pipe(
-    //     switchMap((param) => this.paisService.buscarPaisPorCodigo(param.id))
-    //   )
-    //   .subscribe((pais: Country) => {
-    //     this.pais = pais;
+    //   .subscribe(({ id }) => {
+    //     this.countriesService
+    //       .searchCountryByAlphaCode(id)
+    //       .subscribe((country: Country[]) => {
+    //         console.log(country);
+    //       });
     //   });
-    // this.activatedRoute.params.subscribe(({id}) => {
-    //   this.paisService.buscarPaisPorCodigo(id).subscribe((pais: Country) => {
-    //     console.log(pais);
-    //   });
-    // });
   }
 }

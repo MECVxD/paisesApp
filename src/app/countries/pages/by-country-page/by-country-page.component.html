@@ -4,28 +4,26 @@
 
   <div class="row">
     <div class="col">
-      <!-- <app-pais-input (onEnter)="buscar($event)" (onDebounce)="sugerencias($event)" placeholder="Buscar país..."></app-pais-input> -->
+      <shared-search-box
+        (onValue)="searchByCountry($event)"
+        placeholder="Buscar por país..."
+    ></shared-search-box>
     </div>
   </div>
 
-  <ul *ngIf="mostrarSugerencias" class="list-group">
-    <li *ngFor="let pais of paisesSugeridos" class="list-group-item list-group-item-action">
-      <a class="nav-link" [routerLink]="['/pais', pais.alpha2Code]">{{ pais.name }}</a>
-    </li>
-    <li class="list-group-item list-group-item-action" (click)="buscarSugerido(termino)">
+  <!-- <ul *ngIf="mostrarSugerencias" class="list-group">
+    <li *ngFor="let pais of paisesSugeridos" class="list-group-item list-group-item-action"> -->
+      <!-- <a class="nav-link" [routerLink]="['/pais', pais.alpha2Code]">{{ pais.name }}</a> -->
+    <!-- </li> -->
+    <!-- <li class="list-group-item list-group-item-action" (click)="buscarSugerido(termino)">
       <a class="nav-link">Buscar "{{ termino }}"</a>
-    </li>
-  </ul>
-
+    </li> -->
+  <!-- </ul> -->
   <hr>
 </div>
 
-<div *ngIf="hayError" class="alert alert-danger">
-  No se encontró nada con el término {{ termino }}
-</div>
-
-<div *ngIf="paises.length > 0" class="row">
+<div class="row">
   <div class="col">
-    <app-pais-tabla [paises]="paises"></app-pais-tabla>
+    <countries-country-table [countries]="countries"></countries-country-table>
   </div>
 </div>

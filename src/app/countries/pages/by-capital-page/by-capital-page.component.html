@@ -15,19 +15,9 @@
   <hr>
 </div>
 
-<div *ngIf="hayError" class="alert alert-danger">
-  No se encontró nada con el término {{ termino }}
-</div>
-
-<div *ngIf="countries.length > 0" class="row">
+<div class="row">
   <div class="col">
-    <hr>
-    <ul>
-      <li *ngFor="let country of countries">
-        {{ country.capital }} - {{ country.population }}
-      </li>
-    </ul>
-    <!-- <app-pais-tabla [paises]="countries"></app-pais-tabla> -->
+    <countries-country-table [countries]="countries"></countries-country-table>
   </div>
 </div>
 

@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 
-import { Country } from '../../interfaces/pais.interface';
-// import { PaisService } from '../../services/pais.service';
+import { Country } from '../../interfaces/country.interface';
+import { CountriesService } from '../../services/countries.service';
+
 
 @Component({
-  selector: 'app-por-region',
+  selector: 'countries-by-region-page',
   templateUrl: './by-region.component.html',
   styles: [
     `
@@ -15,7 +16,7 @@ import { Country } from '../../interfaces/pais.interface';
   ],
 })
 export class ByRegionComponent {
-  public paises: Country[] = [];
+  public countries: Country[] = [];
   public regionActiva: string = '';
   public regiones: string[] = [
     'africa',
@@ -25,16 +26,16 @@ export class ByRegionComponent {
     'oceania',
   ];
 
-  // constructor(private paisService: PaisService) {}
+  constructor(private countriesService: CountriesService) {}
 
   public activarRegion(region: string): void {
-    // if (region !== this.regionActiva) {
-    //   this.paises = [];
-    // }
-    // this.regionActiva = region;
-    // this.paisService.buscarRegion(region).subscribe((paises: Country[]) => {
-    //   this.paises = paises;
-    // });
+    if (region !== this.regionActiva) {
+      this.countries = [];
+    }
+    this.regionActiva = region;
+    this.countriesService.searchRegion(region).subscribe((countries: Country[]) => {
+      this.countries = countries;
+    });
   }
 
   public getClassCss(region: string): string {

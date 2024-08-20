@@ -1,50 +1,62 @@
-<div *ngIf="!pais; else divPais" class="alert alert-info">
-  Espere por favor...
-</div>
+<ng-template #loading>
+  <div class="alert alert-info text-center">
+    Espere por favor...
+  </div>
+</ng-template>
 
-<ng-template #divPais class="animate__animated animate__fadeIn animate__faster">
+<div
+  *ngIf="country; else loading"
+  class="animate__animated animate__fadeIn animate__faster">
   <div class="row">
     <div class="col-12">
-      <h1>País: <small>{{ pais.name }}</small></h1>
+      <h2>País: <strong>{{ country.name.common }}</strong></h2>
     </div>
   </div>
   <div class="row">
     <div class="col-4">
       <h3>Bandera</h3>
-      <img [src]="pais.flag" class="img-thumbnail">
+      <img
+        [src]="country.flags.svg"
+        [alt]="country.name.common"
+        class="img-thumbnail">
     </div>
     <div class="col">
       <h3>Información</h3>
       <ul class="list-group">
         <li class="list-group-item">
-          <strong>Población</strong> {{pais.population | number}}
+          <strong>Población</strong> {{country.population | number}}
         </li>
         <li class="list-group-item">
-          <strong>Capital</strong> {{pais.capital}}
+          <strong>Código: </strong> {{country.cca3}}
         </li>
         <li class="list-group-item">
-          <strong>Continente</strong> {{pais.region}}
+          <strong>Capital</strong> {{country.capital}}
+        </li>
+        <li class="list-group-item">
+          <strong>Continente</strong> {{country.region}}
         </li>
       </ul>
     </div>
   </div>
-  <h1>Traducciones</h1>
-  <div class="row">
+
+  <div class="row mt-2">
     <div class="col">
-      <span class="bagde bg-primary mr-1">{{ pais.translations.br }}</span>
-      <span class="bagde bg-primary mr-1">{{ pais.translations.pt }}</span>
-      <span class="bagde bg-primary mr-1">{{ pais.translations.nl }}</span>
-      <span class="bagde bg-primary mr-1">{{ pais.translations.hr }}</span>
-      <span class="bagde bg-primary mr-1">{{ pais.translations.fa }}</span>
-      <span class="bagde bg-primary mr-1">{{ pais.translations.de }}</span>
-      <span class="bagde bg-primary mr-1">{{ pais.translations.es }}</span>
-      <span class="bagde bg-primary mr-1">{{ pais.translations.fr }}</span>
-      <span class="bagde bg-primary mr-1">{{ pais.translations.ja }}</span>
-      <span class="bagde bg-primary mr-1">{{ pais.translations.it }}</span>
-      <span class="bagde bg-primary mr-1">{{ pais.translations.hu }}</span>
+      <h3>Traducciones</h3>
+      <div class="d-flex flex-wrap">
+        <span class="bagde bg-primary m-1">{{ country.translations['ara']?.common }}</span>
+        <span class="bagde bg-primary m-1">{{ country.translations['bre']?.common }}</span>
+        <span class="bagde bg-primary m-1">{{ country.translations['ces']?.common }}</span>
+        <span class="bagde bg-primary m-1">{{ country.translations['cym']?.common }}</span>
+        <span class="bagde bg-primary m-1">{{ country.translations['deu']?.common }}</span>
+        <span class="bagde bg-primary m-1">{{ country.translations['est']?.common }}</span>
+        <span class="bagde bg-primary m-1">{{ country.translations['fin']?.common }}</span>
+        <span class="bagde bg-primary m-1">{{ country.translations['ita']?.common }}</span>
+        <span class="bagde bg-primary m-1">{{ country.translations['kor']?.common }}</span>
+        <span class="bagde bg-primary m-1">{{ country.translations['per']?.common }}</span>
+      </div>
     </div>
   </div>
   <!-- <pre class="mt-5">
-    {{ pais | json }}
+    {{ country | json }}
   </pre> -->
-</ng-template>
+</div>

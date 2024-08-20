@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { Country } from '../../interfaces/pais.interface';
+import { Country } from '../../interfaces/country.interface';
 import { CountriesService } from '../../services/countries.service';
 
 @Component({
@@ -9,26 +9,17 @@ import { CountriesService } from '../../services/countries.service';
   styles: [],
 })
 export class ByCapitalPageComponent {
-  public hayError: boolean = false;
   public countries: Country[] = [];
-  public termino: string = '';
+  public term: string = '';
 
   constructor(private countriesService: CountriesService) {}
 
   public searchByCapital(term: string): void {
-    console.log('Desde ByCapitalPage');
-    console.log({term});
-    this.termino = term;
-    this.hayError = false;
-    this.countriesService.searchCapital(this.termino)
+    this.term = term;
+    this.countriesService.searchCapital(this.term)
       .subscribe(
         (countries: Country[]) => {
           this.countries = countries;
-        },
-        (err) => {
-          this.hayError = true;
-          this.countries = [];
-        }
-      );
+        });
   }
 }

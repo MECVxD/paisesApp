@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
-import { Country } from '../../interfaces/pais.interface';
+import { Country } from '../../interfaces/country.interface';
+import { CountriesService } from '../../services/countries.service';
 
 @Component({
-  selector: 'app-por-pais',
+  selector: 'countries-by-country-page',
   templateUrl: './by-country-page.component.html',
   styles: [
     `
@@ -14,27 +15,21 @@ import { Country } from '../../interfaces/pais.interface';
   ],
 })
 export class ByCountryPageComponent {
-  public hayError: boolean = false;
-  public mostrarSugerencias: boolean = false;
-  public paises: Country[] = [];
-  public paisesSugeridos: Country[] = [];
-  public termino: string = '';
+  // public mostrarSugerencias: boolean = false;
+  public countries: Country[] = [];
+  // public paisesSugeridos: Country[] = [];
+  public term: string = '';
 
-  // constructor(private paisService: PaisService) {}
+  constructor(private countriesService: CountriesService) {}
 
-  public buscar(termino: string): void {
-    // this.termino = termino;
-    // this.hayError = false;
-    // this.paisService.buscarPais(this.termino).subscribe(
-    //   (paises: Country[]) => {
-    //     this.paises = paises;
-    //     this.mostrarSugerencias = false;
-    //   },
-    //   (err) => {
-    //     this.hayError = true;
-    //     this.paises = [];
-    //   }
-    // );
+  public searchByCountry(term: string): void {
+    this.term = term;
+    this.countriesService.searchCountry(this.term).subscribe(
+      (countries: Country[]) => {
+        this.countries = countries;
+        // this.mostrarSugerencias = false;
+      }
+    );
   }
 
   public sugerencias(termino: string): void {
@@ -51,8 +46,8 @@ export class ByCountryPageComponent {
     // );
   }
 
-  public buscarSugerido(termino: string): void {
-    this.buscar(termino);
-    this.mostrarSugerencias = false;
-  }
+  // public buscarSugerido(termino: string): void {
+  //   this.buscar(termino);
+  //   this.mostrarSugerencias = false;
+  // }
 }
