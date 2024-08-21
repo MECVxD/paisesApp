@@ -31,13 +31,5 @@ export class CountryPageComponent implements OnInit {
         if(!country) return this.router.navigateByUrl('');
         return this.country = country;
       });
-    // this.activatedRoute.params
-    //   .subscribe(({ id }) => {
-    //     this.countriesService
-    //       .searchCountryByAlphaCode(id)
-    //       .subscribe((country: Country[]) => {
-    //         console.log(country);
-    //       });
-    //   });
   }
 }

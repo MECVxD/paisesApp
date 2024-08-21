@@ -1,6 +1,6 @@
-import { Component, Output, EventEmitter, OnInit, Input } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit, Input, OnDestroy } from '@angular/core';
 
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
 @Component({
@@ -8,26 +8,34 @@ import { debounceTime } from 'rxjs/operators';
   templateUrl: './search-box.component.html',
   styles: [],
 })
-export class SearchBoxComponent implements OnInit {
+export class SearchBoxComponent implements OnInit, OnDestroy {
+  private debouncer: Subject<string> = new Subject();
+  private debouncerSuscription?: Subscription;
+
   @Input() placeholder: string = '';
+  @Input() initialValue: string = '';
   @Output() onValue: EventEmitter<string> = new EventEmitter();
   @Output() onDebounce: EventEmitter<string> = new EventEmitter();
-
-  debouncer: Subject<string> = new Subject();
 
   public termino: string = '';
 
   ngOnInit(): void {
-    this.debouncer.pipe(debounceTime(300)).subscribe((valor) => {
-      this.onDebounce.emit(valor);
-    });
+    this.debouncerSuscription = this.debouncer
+      .pipe(debounceTime(300))
+      .subscribe((value) => {
+        this.onDebounce.emit(value);
+      });
   }
 
-  public emitValue( value: string ): void {
-    this.onValue.emit( value );
+  ngOnDestroy(): void {
+    this.debouncerSuscription?.unsubscribe();
   }
 
-  public teclaPresionada(): void {
-    this.debouncer.next(this.termino);
+  public emitValue(value: string): void {
+    this.onValue.emit(value);
+  }
+
+  public onKeyPress(searchTerm: string): void {
+    this.debouncer.next(searchTerm);
   }
 }
